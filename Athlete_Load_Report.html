@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+
+  <title>Athlete Weekly Load Report</title>
+  <style>
+        body { font-family: Segoe UI, Arial, sans-serif; background:#f4f6f9; padding:20px; }
+        h1   { color:#2c3e50; }
+        h2   { color:#2c3e50; border-left:4px solid #3498db; padding-left:10px; }
+        .metric-row  { display:flex; flex-wrap:wrap; gap:16px; margin-bottom:24px; }
+        .metric-card { flex:1 1 160px; background:#fff; border-radius:10px;
+                       padding:20px; box-shadow:0 2px 8px rgba(0,0,0,0.08); text-align:center; }
+        .label { font-size:12px; color:#6c757d; text-transform:uppercase; margin-bottom:8px; }
+        .value { font-size:28px; font-weight:700; color:#2c3e50; }
+        .sub   { font-size:12px; color:#adb5bd; margin-top:4px; }
+        .up    { color:#e74c3c; }
+        .down  { color:#27ae60; }
+        select { font-size:15px; padding:8px 14px; border-radius:8px;
+                 border:1px solid #ced4da; margin-bottom:24px; min-width:220px; }
+        .panel { display:none; }
+        table  { width:100%; border-collapse:collapse; background:white;
+                 border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
+        th     { background:#3498db; color:white; padding:12px; text-align:left;
+                 cursor:pointer; user-select:none; white-space:nowrap; }
+        th:hover { background:#2980b9; }
+        th.sort-asc::after  { content:' ▲'; font-size:10px; opacity:0.8; }
+        th.sort-desc::after { content:' ▼'; font-size:10px; opacity:0.8; }
+        th.sort-none::after { content:' ▲▼'; font-size:8px; opacity:0.4; }
+        td     { padding:10px 12px; border-bottom:1px solid #eee; }
+        tr:hover td { background:#f8f9fa; }
+      </style>
+</head>
+<html>
+  <body>
+    <h1>Athlete Weekly Load Report</h1>
+    <p>Current week: WEEK14   |   Previous week: Week13</p>
+    <label>
+      <strong>Select Athlete:</strong>
+    </label>
+    <br/>
+    <select id="athlete-select" onchange="updateAthlete(this.value)">
+      <option value="01">01</option>
+      <option value="1">1</option>
+      <option value="105">105</option>
+      <option value="111">111</option>
+      <option value="112">112</option>
+      <option value="115">115</option>
+      <option value="118">118</option>
+      <option value="122">122</option>
+      <option value="130">130</option>
+      <option value="133">133</option>
+      <option value="134">134</option>
+      <option value="136">136</option>
+      <option value="137">137</option>
+      <option value="138">138</option>
+      <option value="139">139</option>
+      <option value="145">145</option>
+      <option value="146">146</option>
+      <option value="148">148</option>
+      <option value="150">150</option>
+      <option value="151">151</option>
+      <option value="152">152</option>
+      <option value="155">155</option>
+      <option value="156">156</option>
+      <option value="157">157</option>
+      <option value="162">162</option>
+      <option value="163">163</option>
+      <option value="164">164</option>
+      <option value="165">165</option>
+      <option value="166">166</option>
+      <option value="28">28</option>
+      <option value="48">48</option>
+      <option value="54">54</option>
+      <option value="56">56</option>
+      <option value="60">60</option>
+      <option value="64">64</option>
+      <option value="70">70</option>
+      <option value="71">71</option>
+      <option value="73">73</option>
+      <option value="82">82</option>
+      <option value="90">90</option>
+      <option value="92">92</option>
+      <option value="94">94</option>
+      <option value="95">95</option>
+      <option value="96">96</option>
+      <option value="99">99</option>
+    </select>
+    <div class="panel" id="panel-01">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">2,785</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">0%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-1">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">5,663</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">0%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-105">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">3,554</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">0%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-111">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">2,650</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">2,650</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">3,840</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">69%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-112">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">3,531</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">3,531</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,328</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">81.6%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-115">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">2,075</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">2,075</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,407.5</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">47.1%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-118">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">3,645</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">3,645</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,446</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">82%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-122">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">2,514</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">2,514</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,412</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">57%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-130">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">2,177</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">2,177</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,791</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">45.4%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-133">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">1,025</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">0%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-134">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">1,555</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">1,555</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,245</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">36.6%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-136">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">325</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">325</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,015</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">8.1%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-137">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,341</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">0%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-138">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">1,299</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">1,299</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,360</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">29.8%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-139">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">3,762</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">3,762</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">17,168</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">21.9%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-145">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">1,769</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">1,769</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,357</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">40.6%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-146">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,425</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">0%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-148">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">3,444</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">3,444</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,210</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">81.8%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-150">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">3,520</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">3,520</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,235</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">83.1%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-151">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">1,333</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">1,333</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">3,777.5</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">35.3%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-152">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">2,567</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">2,567</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">3,961</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">64.8%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-155">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">2,352</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">2,352</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">3,487</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">67.5%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-156">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">3,435</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">3,435</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">3,802</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">90.3%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-157">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">415</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">415</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">3,605</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">11.5%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-162">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">3,492</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">0%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-163">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">2,613</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">2,613</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">5,532</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">47.2%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-164">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,074</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">0%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-165">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">3,582</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">3,582</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,682</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">76.5%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-166">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">3,712</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">3,712</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,435</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">83.7%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-28">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">0</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">N/A</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-48">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">0</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">N/A</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-54">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">4,345</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">4,345</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,749</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">91.5%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-56">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">5,802</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">0%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-60">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">0</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">N/A</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-64">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">0</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">N/A</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-70">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">550</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">550</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">3,740</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">14.7%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-71">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,996</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">0%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-73">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,531</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">0%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-82">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">3,279</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">3,279</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">3,408</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">96.2%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-90">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">740</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">740</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,540</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">16.3%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-92">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">3,428</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">3,428</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,263</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">80.4%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-94">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,345</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">0%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-95">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">5,468</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">0%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-96">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">3,517</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">3,517</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,385</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">80.2%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" id="panel-99">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">325</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">325</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value down">+0%</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">4,815</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">6.7%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
+    <h2>Full Squad Summary</h2>
+    <p>
+      <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600; margin-right:8px;">Green: 0-20%</span>
+      <span style="background:#fff3cd; color:#856404; padding:4px 10px; border-radius:6px; font-weight:600; margin-right:8px;">Orange: 21-30%</span>
+      <span style="background:#f8d7da; color:#721c24; padding:4px 10px; border-radius:6px; font-weight:600;">Red: 31%+</span>
+    </p>
+    <table id="squad-table">
+      <thead>
+        <tr>
+          <th class="sort-none" onclick="sortTable(0,&#39;text&#39;)">Athlete</th>
+          <th class="sort-none" onclick="sortTable(1,&#39;num&#39;)">Current Week</th>
+          <th class="sort-none" onclick="sortTable(2,&#39;num&#39;)">Previous Week</th>
+          <th class="sort-none" onclick="sortTable(3,&#39;pct&#39;)">Week-on-Week Change</th>
+          <th class="sort-none" onclick="sortTable(4,&#39;num&#39;)">Historical Max</th>
+          <th class="sort-none" onclick="sortTable(5,&#39;pct&#39;)">% of Historical Max</th>
+        </tr>
+      </thead>
+      <tbody id="squad-tbody">
+        <tr>
+          <td>01</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="2785">2,785</td>
+          <td data-val="0">0%</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="5663">5,663</td>
+          <td data-val="0">0%</td>
+        </tr>
+        <tr>
+          <td>105</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="3554">3,554</td>
+          <td data-val="0">0%</td>
+        </tr>
+        <tr>
+          <td>111</td>
+          <td data-val="2650">2,650</td>
+          <td data-val="2650">2,650</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="3840">3,840</td>
+          <td data-val="69">69%</td>
+        </tr>
+        <tr>
+          <td>112</td>
+          <td data-val="3531">3,531</td>
+          <td data-val="3531">3,531</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4328">4,328</td>
+          <td data-val="81.6">81.6%</td>
+        </tr>
+        <tr>
+          <td>115</td>
+          <td data-val="2075">2,075</td>
+          <td data-val="2075">2,075</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4407.5">4,407.5</td>
+          <td data-val="47.1">47.1%</td>
+        </tr>
+        <tr>
+          <td>118</td>
+          <td data-val="3645">3,645</td>
+          <td data-val="3645">3,645</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4446">4,446</td>
+          <td data-val="82">82%</td>
+        </tr>
+        <tr>
+          <td>122</td>
+          <td data-val="2514">2,514</td>
+          <td data-val="2514">2,514</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4412">4,412</td>
+          <td data-val="57">57%</td>
+        </tr>
+        <tr>
+          <td>130</td>
+          <td data-val="2177">2,177</td>
+          <td data-val="2177">2,177</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4791">4,791</td>
+          <td data-val="45.4">45.4%</td>
+        </tr>
+        <tr>
+          <td>133</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="1025">1,025</td>
+          <td data-val="0">0%</td>
+        </tr>
+        <tr>
+          <td>134</td>
+          <td data-val="1555">1,555</td>
+          <td data-val="1555">1,555</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4245">4,245</td>
+          <td data-val="36.6">36.6%</td>
+        </tr>
+        <tr>
+          <td>136</td>
+          <td data-val="325">325</td>
+          <td data-val="325">325</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4015">4,015</td>
+          <td data-val="8.1">8.1%</td>
+        </tr>
+        <tr>
+          <td>137</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="4341">4,341</td>
+          <td data-val="0">0%</td>
+        </tr>
+        <tr>
+          <td>138</td>
+          <td data-val="1299">1,299</td>
+          <td data-val="1299">1,299</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4360">4,360</td>
+          <td data-val="29.8">29.8%</td>
+        </tr>
+        <tr>
+          <td>139</td>
+          <td data-val="3762">3,762</td>
+          <td data-val="3762">3,762</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="17168">17,168</td>
+          <td data-val="21.9">21.9%</td>
+        </tr>
+        <tr>
+          <td>145</td>
+          <td data-val="1769">1,769</td>
+          <td data-val="1769">1,769</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4357">4,357</td>
+          <td data-val="40.6">40.6%</td>
+        </tr>
+        <tr>
+          <td>146</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="4425">4,425</td>
+          <td data-val="0">0%</td>
+        </tr>
+        <tr>
+          <td>148</td>
+          <td data-val="3444">3,444</td>
+          <td data-val="3444">3,444</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4210">4,210</td>
+          <td data-val="81.8">81.8%</td>
+        </tr>
+        <tr>
+          <td>150</td>
+          <td data-val="3520">3,520</td>
+          <td data-val="3520">3,520</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4235">4,235</td>
+          <td data-val="83.1">83.1%</td>
+        </tr>
+        <tr>
+          <td>151</td>
+          <td data-val="1333">1,333</td>
+          <td data-val="1333">1,333</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="3777.5">3,777.5</td>
+          <td data-val="35.3">35.3%</td>
+        </tr>
+        <tr>
+          <td>152</td>
+          <td data-val="2567">2,567</td>
+          <td data-val="2567">2,567</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="3961">3,961</td>
+          <td data-val="64.8">64.8%</td>
+        </tr>
+        <tr>
+          <td>155</td>
+          <td data-val="2352">2,352</td>
+          <td data-val="2352">2,352</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="3487">3,487</td>
+          <td data-val="67.5">67.5%</td>
+        </tr>
+        <tr>
+          <td>156</td>
+          <td data-val="3435">3,435</td>
+          <td data-val="3435">3,435</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="3802">3,802</td>
+          <td data-val="90.3">90.3%</td>
+        </tr>
+        <tr>
+          <td>157</td>
+          <td data-val="415">415</td>
+          <td data-val="415">415</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="3605">3,605</td>
+          <td data-val="11.5">11.5%</td>
+        </tr>
+        <tr>
+          <td>162</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="3492">3,492</td>
+          <td data-val="0">0%</td>
+        </tr>
+        <tr>
+          <td>163</td>
+          <td data-val="2613">2,613</td>
+          <td data-val="2613">2,613</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="5532">5,532</td>
+          <td data-val="47.2">47.2%</td>
+        </tr>
+        <tr>
+          <td>164</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="4074">4,074</td>
+          <td data-val="0">0%</td>
+        </tr>
+        <tr>
+          <td>165</td>
+          <td data-val="3582">3,582</td>
+          <td data-val="3582">3,582</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4682">4,682</td>
+          <td data-val="76.5">76.5%</td>
+        </tr>
+        <tr>
+          <td>166</td>
+          <td data-val="3712">3,712</td>
+          <td data-val="3712">3,712</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4435">4,435</td>
+          <td data-val="83.7">83.7%</td>
+        </tr>
+        <tr>
+          <td>28</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">N/A</td>
+        </tr>
+        <tr>
+          <td>48</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">N/A</td>
+        </tr>
+        <tr>
+          <td>54</td>
+          <td data-val="4345">4,345</td>
+          <td data-val="4345">4,345</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4749">4,749</td>
+          <td data-val="91.5">91.5%</td>
+        </tr>
+        <tr>
+          <td>56</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="5802">5,802</td>
+          <td data-val="0">0%</td>
+        </tr>
+        <tr>
+          <td>60</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">N/A</td>
+        </tr>
+        <tr>
+          <td>64</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">N/A</td>
+        </tr>
+        <tr>
+          <td>70</td>
+          <td data-val="550">550</td>
+          <td data-val="550">550</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="3740">3,740</td>
+          <td data-val="14.7">14.7%</td>
+        </tr>
+        <tr>
+          <td>71</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="4996">4,996</td>
+          <td data-val="0">0%</td>
+        </tr>
+        <tr>
+          <td>73</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="4531">4,531</td>
+          <td data-val="0">0%</td>
+        </tr>
+        <tr>
+          <td>82</td>
+          <td data-val="3279">3,279</td>
+          <td data-val="3279">3,279</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="3408">3,408</td>
+          <td data-val="96.2">96.2%</td>
+        </tr>
+        <tr>
+          <td>90</td>
+          <td data-val="740">740</td>
+          <td data-val="740">740</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4540">4,540</td>
+          <td data-val="16.3">16.3%</td>
+        </tr>
+        <tr>
+          <td>92</td>
+          <td data-val="3428">3,428</td>
+          <td data-val="3428">3,428</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4263">4,263</td>
+          <td data-val="80.4">80.4%</td>
+        </tr>
+        <tr>
+          <td>94</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="4345">4,345</td>
+          <td data-val="0">0%</td>
+        </tr>
+        <tr>
+          <td>95</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="5468">5,468</td>
+          <td data-val="0">0%</td>
+        </tr>
+        <tr>
+          <td>96</td>
+          <td data-val="3517">3,517</td>
+          <td data-val="3517">3,517</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4385">4,385</td>
+          <td data-val="80.2">80.2%</td>
+        </tr>
+        <tr>
+          <td>99</td>
+          <td data-val="325">325</td>
+          <td data-val="325">325</td>
+          <td data-val="0">
+            <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600;">+0%</span>
+          </td>
+          <td data-val="4815">4,815</td>
+          <td data-val="6.7">6.7%</td>
+        </tr>
+      </tbody>
+    </table>
+    <script>
+        // ── Athlete panel toggle ──
+        document.addEventListener("DOMContentLoaded", function() {
+          var sel = document.getElementById("athlete-select");
+          if (sel) updateAthlete(sel.value);
+        });
+
+        function updateAthlete(name) {
+          var id = name.replace(/[^A-Za-z0-9]/g, "_");
+          document.querySelectorAll(".panel").forEach(function(el) {
+            el.style.display = "none";
+          });
+          var panel = document.getElementById("panel-" + id);
+          if (panel) panel.style.display = "block";
+        }
+
+        // ── Table sorting ──
+        var sortState = { col: -1, asc: true };
+
+        function sortTable(colIdx, type) {
+          var table  = document.getElementById("squad-table");
+          var tbody  = document.getElementById("squad-tbody");
+          var rows   = Array.from(tbody.querySelectorAll("tr"));
+          var ths    = table.querySelectorAll("th");
+
+          // Toggle direction if same column
+          if (sortState.col === colIdx) {
+            sortState.asc = !sortState.asc;
+          } else {
+            sortState.col = colIdx;
+            sortState.asc = false; // default: high to low first
+          }
+
+          rows.sort(function(a, b) {
+            var cellA = a.cells[colIdx];
+            var cellB = b.cells[colIdx];
+            var valA, valB;
+
+            if (type === "text") {
+              valA = cellA.textContent.trim().toLowerCase();
+              valB = cellB.textContent.trim().toLowerCase();
+              return sortState.asc
+                ? valA.localeCompare(valB)
+                : valB.localeCompare(valA);
+            } else {
+              // numeric — use data-val attribute for clean number
+              valA = parseFloat(cellA.getAttribute("data-val"));
+              valB = parseFloat(cellB.getAttribute("data-val"));
+              if (isNaN(valA)) valA = -Infinity;
+              if (isNaN(valB)) valB = -Infinity;
+              return sortState.asc ? valA - valB : valB - valA;
+            }
+          });
+
+          rows.forEach(function(r) { tbody.appendChild(r); });
+
+          // Update header indicators
+          ths.forEach(function(th, i) {
+            th.className = i === colIdx
+              ? (sortState.asc ? "sort-asc" : "sort-desc")
+              : "sort-none";
+          });
+        }
+      </script>
+  </body>
+</html>
+</html>
