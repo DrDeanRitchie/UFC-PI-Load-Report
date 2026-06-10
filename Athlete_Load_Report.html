@@ -6,42 +6,49 @@
 
   <title>Athlete Weekly Load Report</title>
   <style>
-        body { font-family: Segoe UI, Arial, sans-serif; background:#f4f6f9; padding:20px; }
-        h1   { color:#2c3e50; }
-        h2   { color:#2c3e50; border-left:4px solid #3498db; padding-left:10px; }
+        body { font-family: Segoe UI, Arial, sans-serif; background:#000000; padding:20px; color:#f0ede8; }
+        .report-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+        .report-header h1 { margin:0; color:#f0ede8; }
+        .report-logo { height:50px; width:auto; object-fit:contain; }
+        h1   { color:#f0ede8; }
+        h2   { color:#f0ede8; border-left:4px solid #a8b0b8; padding-left:10px; }
         .metric-row  { display:flex; flex-wrap:wrap; gap:16px; margin-bottom:24px; }
-        .metric-card { flex:1 1 160px; background:#fff; border-radius:10px;
+        .metric-card { flex:1 1 160px; background:#1a1a1a; border-radius:10px;
                        padding:20px; box-shadow:0 2px 8px rgba(0,0,0,0.08); text-align:center; }
-        .label { font-size:12px; color:#6c757d; text-transform:uppercase; margin-bottom:8px; }
-        .value { font-size:28px; font-weight:700; color:#2c3e50; }
-        .sub   { font-size:12px; color:#adb5bd; margin-top:4px; }
+        .label { font-size:12px; color:#a8b0b8; text-transform:uppercase; margin-bottom:8px; }
+        .value { font-size:28px; font-weight:700; color:#f0ede8; }
+        .sub   { font-size:12px; color:#6e7a84; margin-top:4px; }
         .up    { color:#e74c3c; }
         .down  { color:#27ae60; }
         select { font-size:15px; padding:8px 14px; border-radius:8px;
-                 border:1px solid #ced4da; margin-bottom:24px; min-width:220px; }
+                 border:1px solid #3a3a3a; margin-bottom:24px; min-width:220px; background:#1a1a1a; color:#f0ede8; }
         .panel { display:none; }
-        table  { width:100%; border-collapse:collapse; background:white;
+        table  { width:100%; border-collapse:collapse; background:#1a1a1a;
                  border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.08); }
-        th     { background:#3498db; color:white; padding:12px; text-align:left;
+        th     { background:linear-gradient(135deg, #c0c8d0 0%, #8a9299 50%, #b8c0c8 100%); color:#1a1a1a; padding:12px; text-align:left;
                  cursor:pointer; user-select:none; white-space:nowrap; }
-        th:hover { background:#2980b9; }
+        th:hover { background:linear-gradient(135deg, #d0d8e0 0%, #9aa2aa 50%, #c8d0d8 100%); }
         th.sort-asc::after  { content:' ▲'; font-size:10px; opacity:0.8; }
         th.sort-desc::after { content:' ▼'; font-size:10px; opacity:0.8; }
         th.sort-none::after { content:' ▲▼'; font-size:8px; opacity:0.4; }
-        td     { padding:10px 12px; border-bottom:1px solid #eee; }
-        tr:hover td { background:#f8f9fa; }
+        td     { padding:10px 12px; border-bottom:1px solid #2e2e2e; color:#f0ede8; }
+        tr:hover td { background:#242424; }
       </style>
 </head>
 <html>
   <body>
-    <h1>Athlete Weekly Load Report</h1>
-    <p>Current week: WEEK14   |   Previous week: Week13</p>
+    <div class="report-header">
+      <div>
+        <h1>Athlete Weekly Load Report</h1>
+        <p>Current week: WEEK14   |   Previous week: Week13</p>
+      </div>
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPcAAAAkCAYAAABVJqzSAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFGmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNi4wLWMwMDIgNzkuMTY0NDg4LCAyMDIwLzA3LzEwLTIyOjA2OjUzICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjIuMCAoTWFjaW50b3NoKSIgeG1wOkNyZWF0ZURhdGU9IjIwMjEtMDMtMDhUMTM6MzI6MDIrMDE6MDAiIHhtcDpNb2RpZnlEYXRlPSIyMDIxLTA0LTE0VDE4OjQwOjE3KzAyOjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIxLTA0LTE0VDE4OjQwOjE3KzAyOjAwIiBkYzpmb3JtYXQ9ImltYWdlL3BuZyIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgcGhvdG9zaG9wOklDQ1Byb2ZpbGU9InNSR0IgSUVDNjE5NjYtMi4xIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjhhNzM0ODMzLWUyOTUt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" class="report-logo" alt="Logo"/>
+    </div>
     <label>
       <strong>Select Athlete:</strong>
     </label>
     <br/>
     <select id="athlete-select" onchange="updateAthlete(this.value)">
-      <option value="01">01</option>
       <option value="1">1</option>
       <option value="105">105</option>
       <option value="111">111</option>
@@ -86,36 +93,8 @@
       <option value="95">95</option>
       <option value="96">96</option>
       <option value="99">99</option>
+      <option value="Dong Huaxiang 1">Dong Huaxiang 1</option>
     </select>
-    <div class="panel" id="panel-01">
-      <div class="metric-row">
-        <div class="metric-card">
-          <div class="label">Current Week Load</div>
-          <div class="value">0</div>
-          <div class="sub">WEEK14</div>
-        </div>
-        <div class="metric-card">
-          <div class="label">Previous Week Load</div>
-          <div class="value">0</div>
-          <div class="sub">Week13</div>
-        </div>
-        <div class="metric-card">
-          <div class="label">Week-on-Week Change</div>
-          <div class="value ">N/A</div>
-          <div class="sub">vs previous week</div>
-        </div>
-        <div class="metric-card">
-          <div class="label">Historical Max</div>
-          <div class="value">2,785</div>
-          <div class="sub">all-time weekly peak</div>
-        </div>
-        <div class="metric-card">
-          <div class="label">% of Historical Max</div>
-          <div class="value">0%</div>
-          <div class="sub">current vs max</div>
-        </div>
-      </div>
-    </div>
     <div class="panel" id="panel-1">
       <div class="metric-row">
         <div class="metric-card">
@@ -1392,6 +1371,35 @@
         </div>
       </div>
     </div>
+    <div class="panel" id="panel-Dong_Huaxiang_1">
+      <div class="metric-row">
+        <div class="metric-card">
+          <div class="label">Current Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">WEEK14</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Previous Week Load</div>
+          <div class="value">0</div>
+          <div class="sub">Week13</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Week-on-Week Change</div>
+          <div class="value ">N/A</div>
+          <div class="sub">vs previous week</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">Historical Max</div>
+          <div class="value">2,785</div>
+          <div class="sub">all-time weekly peak</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">% of Historical Max</div>
+          <div class="value">0%</div>
+          <div class="sub">current vs max</div>
+        </div>
+      </div>
+    </div>
     <h2>Full Squad Summary</h2>
     <p>
       <span style="background:#d4edda; color:#155724; padding:4px 10px; border-radius:6px; font-weight:600; margin-right:8px;">Green: 0-20%</span>
@@ -1410,16 +1418,6 @@
         </tr>
       </thead>
       <tbody id="squad-tbody">
-        <tr>
-          <td>01</td>
-          <td data-val="0">0</td>
-          <td data-val="0">0</td>
-          <td data-val="-Inf">
-            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
-          </td>
-          <td data-val="2785">2,785</td>
-          <td data-val="0">0%</td>
-        </tr>
         <tr>
           <td>1</td>
           <td data-val="0">0</td>
@@ -1859,6 +1857,16 @@
           </td>
           <td data-val="4815">4,815</td>
           <td data-val="6.7">6.7%</td>
+        </tr>
+        <tr>
+          <td>Dong Huaxiang 1</td>
+          <td data-val="0">0</td>
+          <td data-val="0">0</td>
+          <td data-val="-Inf">
+            <span style="background:#f0f0f0; color:#333; padding:4px 10px; border-radius:6px; font-weight:600;">N/A</span>
+          </td>
+          <td data-val="2785">2,785</td>
+          <td data-val="0">0%</td>
         </tr>
       </tbody>
     </table>
